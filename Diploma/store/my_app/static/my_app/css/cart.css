@@ -1,0 +1,322 @@
+/* Кнопка возврата в каталог */
+.back-to-catalog {
+    text-align: center;
+    margin: 20px;
+}
+
+.back-link {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: 'Ink Free', cursive, sans-serif;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: rgba(255, 68, 68, 0.3);
+}
+
+.back-link:hover {
+    color: #ffcccc;
+    background: rgba(255, 68, 68, 0.5);
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.8);
+}
+
+/* Основной макет */
+.cart-layout {
+    display: flex;
+    gap: 30px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Левая колонка - товары */
+.cart-items-column {
+    flex: 2;
+}
+
+/* Правая колонка - расчет */
+.cart-summary-column {
+    flex: 1;
+}
+
+/* Контейнер для карточек корзины - 3 в строку */
+.cart-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+/* Новые карточки для корзины - фиксированный размер */
+.cart-card {
+    width: calc(33.333% - 14px); /* 3 карточки в строку с отступами */
+    height: 320px; /* Уменьшил высоту, так как убрали блок информации */
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    overflow: hidden; /* Чтобы ничего не вылазило */
+}
+
+.cart-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+}
+
+/* Заголовок карточки */
+.cart-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    min-height: 40px; /* Фиксированная высота заголовка */
+}
+
+.cart-card .card-title {
+    font-size: 16px;
+    color: #FF0000;
+    text-shadow:
+        -1px -1px 0 #ffffff,
+        1px -1px 0 #ffffff,
+        -1px 1px 0 #ffffff,
+        1px 1px 0 #ffffff;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.card-quantity {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    background: rgba(255, 68, 68, 0.8);
+    padding: 3px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Контейнер для изображения - занимает всё доступное пространство */
+.cart-card .card-image-container {
+    flex: 1; /* Занимает всё оставшееся пространство */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0; /* Убрал отступы сверху и снизу */
+    overflow: hidden; /* Чтобы изображение не вылазило */
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    min-height: 0; /* Важно для flex-растягивания */
+}
+
+/* Изображение в карточке - фиксированная высота, не обрезается */
+.cart-card .card-image {
+    width: auto;
+    max-width: 100%;
+    height: 200px; /* Увеличил высоту изображения, так как убрали блок информации */
+    object-fit: contain; /* Не обрезаем, сохраняем пропорции */
+    border-radius: 6px;
+}
+
+/* Убрал блок информации об игре */
+.cart-card .card-info {
+    display: none; /* Полностью скрываем блок информации */
+}
+
+/* Футер карточки */
+.cart-card .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    min-height: 40px; /* Фиксированная высота футера */
+    margin-top: 8px; /* Небольшой отступ сверху */
+}
+
+.cart-card .card-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+}
+
+/* Карточка расчета */
+.summary-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    padding: 25px;
+    position: sticky;
+    top: 20px;
+}
+
+.summary-title {
+    color: #ffffff;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.8);
+}
+
+.summary-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.item-name {
+    flex: 2;
+    text-align: left;
+    font-size: 14px;
+}
+
+.item-quantity {
+    flex: 1;
+    text-align: center;
+    color: #ffcccc;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.unit-price {
+    font-size: 12px;
+    color: #c7c7c7;
+}
+
+.item-price {
+    flex: 1;
+    text-align: right;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.summary-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff4444, transparent);
+    margin: 20px 0;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.total-label {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.total-price {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.8);
+}
+
+.checkout-button {
+    width: 100%;
+    background: linear-gradient(135deg, #ff0000, #ff4500);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Ink Free', cursive, sans-serif;
+}
+
+.checkout-button:hover {
+    background: linear-gradient(135deg, #ff6b6b, #ff4444);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 68, 68, 0.6);
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .cart-card {
+        width: calc(50% - 10px); /* 2 карточки в строку на планшетах */
+    }
+}
+
+@media (max-width: 1024px) {
+    .cart-layout {
+        flex-direction: column;
+    }
+
+    .cart-items-column,
+    .cart-summary-column {
+        flex: none;
+    }
+
+    .summary-card {
+        position: static;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .cart-card {
+        width: calc(33.333% - 14px); /* Возвращаем 3 карточки */
+    }
+}
+
+@media (max-width: 768px) {
+    .cart-layout {
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .cart-card {
+        width: calc(50% - 10px); /* 2 карточки на мобильных */
+        padding: 12px;
+        height: 300px; /* Немного меньше на мобильных */
+    }
+
+    .cart-card .card-image {
+        height: 180px; /* Соответственно меньше изображение */
+    }
+
+    .cart-card .card-title {
+        font-size: 14px;
+    }
+
+    .summary-card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cart-card {
+        width: 100%; /* 1 карточка на очень маленьких экранах */
+        height: 280px;
+    }
+
+    .cart-cards-container {
+        justify-content: center;
+    }
+
+    .cart-card .card-image {
+        height: 160px;
+    }
+}

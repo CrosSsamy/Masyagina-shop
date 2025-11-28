@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="{% static 'my_app/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'my_app/css/cart.css' %}">
+</head>
+<body>
+    <header class="catalog-header">
+        <h1 class="catalog-title">Корзина покупок</h1>
+    </header>
+
+    <div class="back-to-catalog">
+        <a href="/" class="back-link">← Вернуться в каталог</a>
+    </div>
+
+    <div class="cart-layout">
+        <!-- Левая колонка - товары -->
+        <div class="cart-items-column">
+            <div class="cart-cards-container">
+                {% for item in cart_items %}
+                <div class="card cart-card">
+                    <div class="card-header">
+                        <span class="card-title">{{ item.title }}</span>
+                        <span class="card-quantity">×{{ item.quantity }}</span>
+                    </div>
+
+                    <img class="card-image"
+                         src="{% static 'my_app/images/' %}{{ item.img }}"
+                         alt="{{ item.title }}"
+                         onerror="this.src='{% static 'my_app/images/placeholder.jpg' %}'">
+
+                    <div class="card-footer">
+                        <span class="card-price">${{ item.price }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Правая колонка - расчет -->
+        <div class="cart-summary-column">
+            <div class="summary-card">
+                <h3 class="summary-title">Ваш заказ</h3>
+
+                <div class="summary-items">
+                    {% for item in cart_items %}
+                    <div class="summary-item">
+                        <span class="item-name">{{ item.title }}</span>
+                        <span class="item-quantity">
+                            <span>${{ item.price }}</span>
+                            <span>×{{ item.quantity }}</span>
+                        </span>
+                        <span class="item-price">${{ item.total_price }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-total">
+                    <span class="total-label">ИТОГО:</span>
+                    <span class="total-price">${{ total_cart_sum }}</span>
+                </div>
+
+                <button class="checkout-button">Оформить заказ</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

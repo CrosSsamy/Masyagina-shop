@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Каталог</title>
+    <link rel="stylesheet" href="{% static 'my_app/css/style.css' %}">
+</head>
+<body>
+    <!-- Кнопка корзины -->
+    <button class="cart-button" onclick="location.href='/cart/'">
+        🛒
+        {% if cart_count > 0 %}
+        <span class="cart-count">{{ cart_count }}</span>
+        {% endif %}
+    </button>
+    <header class="catalog-header"><h1 class="catalog-title">Каталог игр Yakuza</h1></header>
+    <div class="cards-container">
+        {% for item in items %}
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title">{{ item.title }}</span>
+                <span class="card-id">ID: {{ item.id }}</span>
+            </div>
+
+            <img class="card-image"
+                 src="{% static 'my_app/images/' %}{{ item.img }}"
+                 alt="{{ item.title }}"
+                 onerror="this.src='{% static 'my_app/images/placeholder.jpg' %}'">
+
+            <div class="card-info">
+                {{ item.info }}
+            </div>
+
+            <div class="card-footer">
+                <span class="card-price">${{ item.price }}</span>
+                <form method="post" action="/add-to-cart/">
+                    {% csrf_token %}
+                    <input type="hidden" name="game_id" value="{{ item.id }}">
+                    <button type="submit" class="buy-button">Купить</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
